@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./Frontend/WordApp
+      dockerfile: Dockerfile
+    container_name: c_wordapp_frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend-service
+    networks:
+      - wordapp-network
+
+  backend-service:
+    build:
+      context: ./Backend/WordApp  
+      dockerfile: src/WordApp.WebAPI/Dockerfile
+    container_name: c_wordapp_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - postgresql-server
+    networks:
+      - wordapp-network
+
+  postgresql-server:
+    image: postgres:16
+    container_name: c_wordapp_database
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: WordApp
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - wordapp-network
+
+volumes:
+  postgres_data:
+
+networks:
+  wordapp-network:
+    driver: bridge

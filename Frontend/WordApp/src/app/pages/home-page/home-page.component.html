@@ -1,0 +1,19 @@
+<div class="flex justify-center items-center gap-6 h-16 w-full fixed">
+  <button (click)="selectTab(1)" class="bg-emerald-600 text-white font-bold py-2 px-4 cursor-pointer rounded-md shadow-xl hover:bg-emerald-400 transition duration-300 ease-in-out">
+    Daily Words
+  </button>
+  <button (click)="selectTab(2)" class="bg-amber-500 text-white font-bold py-2 px-4 cursor-pointer rounded-md shadow-xl hover:bg-amber-300 transition duration-300 ease-in-out">
+    Known Words
+  </button>
+  <button (click)="selectTab(3)" class="bg-rose-500 text-white font-bold py-2 px-4 cursor-pointer rounded-md shadow-xl hover:bg-rose-400 transition duration-300 ease-in-out">
+    Create Word
+  </button>
+</div>
+
+<div class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-violet-500 to-violet-800">
+ 
+    <app-daily-word *ngIf="selectedTab == 1"></app-daily-word>
+    <app-known-word *ngIf="selectedTab == 2"></app-known-word>
+    <app-create-word *ngIf="selectedTab == 3"></app-create-word>
+
+</div>

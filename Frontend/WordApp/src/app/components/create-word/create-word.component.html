@@ -1,0 +1,45 @@
+<form [formGroup]="wordForm" (ngSubmit)="onSubmit()"
+      class="flex flex-col items-center justify-center min-h-screen">
+
+  <div class="flex flex-col items-center justify-center min-w-[600px] bg-violet-800 rounded-md shadow-2xl border-1 border-yellow-300 gap-1 p-4 mt-4">
+    <h1 class="text-yellow-300 text-center text-4xl mt-2">Add New Word</h1>
+
+    <div class="flex flex-row items-center justify-center gap-6 mt-4 min-w-[600px]">
+      <input type="text" formControlName="word" placeholder="Word"
+             class="border border-gray-300 text-yellow-300 placeholder-gray-200 rounded-md p-2 w-1/3 bg-slate-600" />
+      <input type="text" formControlName="translate" placeholder="Translate"
+             class="border border-gray-300 text-yellow-300 placeholder-gray-200 rounded-md p-2 w-1/3 bg-slate-600" />
+    </div>
+
+    <div class="flex flex-col items-center justify-center gap-6 mt-4 min-w-[600px]">
+      <hr class="w-full border-gray-300" />
+      <h1 class="text-yellow-300 text-center text-2xl mt-2">Synonyms</h1>
+    </div>
+
+    <div formArrayName="synonyms" class="flex flex-col gap-4 mt-4 w-full">
+      <div *ngFor="let synonym of synonymControls.controls; let i = index"
+           [formGroupName]="i"
+           class="flex flex-row items-center justify-center gap-6 w-full">
+        <input type="text" formControlName="word" placeholder="Word"
+               class="border border-gray-300 text-yellow-300 placeholder-gray-200 rounded-md p-2 w-1/3 bg-slate-600" />
+        <input type="text" formControlName="translate" placeholder="Translate"
+               class="border border-gray-300 text-yellow-300 placeholder-gray-200 rounded-md p-2 w-1/3 bg-slate-600" />
+      </div>
+    </div>
+
+    <div class="flex flex-row items-center justify-center gap-6 mt-4 min-w-[600px]">
+      <button type="button" (click)="addSynonym()"
+              class="bg-indigo-600 text-white font-bold py-2 px-4 cursor-pointer rounded-md shadow-xl hover:bg-emerald-400 transition duration-300 ease-in-out">
+        Add Synonym
+      </button>
+    </div>
+  </div>
+
+  <div class="flex flex-row items-center justify-center gap-6 mt-4 min-w-[600px]">
+    <button type="submit"
+            class="bg-rose-500 text-white font-bold py-2 px-4 cursor-pointer rounded-md shadow-xl hover:bg-pink-400 transition duration-300 ease-in-out">
+      ADD TO DATABASE
+    </button>
+  </div>
+
+</form>
